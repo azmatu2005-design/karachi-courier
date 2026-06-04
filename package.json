@@ -1,0 +1,21 @@
+{
+  "name": "karachi-courier",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Same-day courier platform for Karachi",
+  "scripts": {
+    "dev:backend": "pnpm --filter @karachi-courier/backend dev",
+    "dev:ops": "pnpm --filter @karachi-courier/ops-dashboard dev",
+    "dev:business": "pnpm --filter @karachi-courier/business-portal dev",
+    "dev:tracking": "pnpm --filter @karachi-courier/tracking dev",
+    "dev:rider": "pnpm --filter @karachi-courier/rider-app start",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "postinstall": "pnpm --filter @karachi-courier/shared build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
