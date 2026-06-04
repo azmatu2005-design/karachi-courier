@@ -2,7 +2,6 @@ import {
   createClient,
   type SupabaseClient,
 } from "@supabase/supabase-js";
-import type { WebSocketLikeConstructor } from "@supabase/realtime-js";
 import ws from "ws";
 
 let supabaseClient: SupabaseClient | null = null;
@@ -32,7 +31,8 @@ export function getSupabase(): SupabaseClient {
         autoRefreshToken: false,
       },
       realtime: {
-        transport: ws as unknown as WebSocketLikeConstructor,
+        // @ts-expect-error ws is valid Supabase realtime transport on Node < 22
+        transport: ws,
       },
     });
   }
