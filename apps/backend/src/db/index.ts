@@ -2,6 +2,8 @@ import {
   createClient,
   type SupabaseClient,
 } from "@supabase/supabase-js";
+import type { WebSocketLikeConstructor } from "@supabase/realtime-js";
+import ws from "ws";
 
 let supabaseClient: SupabaseClient | null = null;
 
@@ -22,9 +24,15 @@ export function getSupabase(): SupabaseClient {
     console.log("SUPABASE_URL:", url);
 
     supabaseClient = createClient(url, serviceKey, {
+      global: {
+        fetch,
+      },
       auth: {
         persistSession: false,
         autoRefreshToken: false,
+      },
+      realtime: {
+        transport: ws as unknown as WebSocketLikeConstructor,
       },
     });
   }
